@@ -175,7 +175,7 @@
 <header class="hero">
   <h1>Ilara Health — Investor Pack</h1>
   <div class="sub">Monthly financials, current cash, wind-down view</div>
-  <div class="as-of">Last refreshed: 2026-06-05 19:02 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
+  <div class="as-of">Last refreshed: 2026-06-05 19:05 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
 </header>
 
 <nav class="tabs">
@@ -192,7 +192,7 @@
   <div class="grid-kpi">
     <div class="kpi alert"><div class="label">Cash today</div><div class="value">$8,588</div><div class="delta muted">As of 2026-06-02</div></div>
     <div class="kpi"><div class="label">Recoverable AR</div><div class="value">$34K</div><div class="delta muted">$178K book × realistic %</div></div>
-    <div class="kpi"><div class="label">Inventory (range)</div><div class="value">$120K-$175K</div><div class="delta muted">Pending Tony serial count</div></div>
+    <div class="kpi"><div class="label">Sellable inventory</div><div class="value">~$100K</div><div class="delta muted">40 butterflies @ $2.5K to $3K; rest not sellable</div></div>
     <div class="kpi alert"><div class="label">Unsecured liabilities</div><div class="value">~$420K</div><div class="delta muted">excl. AlphaMundi secured; Max + founder amounts TBC per Bev email</div></div>
     <div class="kpi alert"><div class="label">Net position</div><div class="value">Insolvent</div><div class="delta muted">AlphaMundi consented to Tembelea platform sale</div></div>
   </div>
@@ -308,7 +308,7 @@
     <table>
       <thead><tr><th>Asset</th><th class="num">Book USD</th><th>Recovery</th><th>Notes</th></tr></thead>
       <tbody id="real-assets"></tbody>
-      <tfoot><tr class="total"><td colspan="3">TOTAL REALISTIC RECOVERY</td></tr><tr class="total"><td colspan="2">$160K - $220K</td><td colspan="2"></td></tr></tfoot>
+      <tfoot><tr class="total"><td colspan="3">TOTAL REALISTIC RECOVERY</td></tr><tr class="total"><td colspan="2">~$142K</td><td colspan="2">Cash $8.5K + recoverable AR $34K + sellable butterflies $100K</td></tr></tfoot>
     </table>
 
     <h3>Liabilities — priority order in liquidation</h3>
@@ -396,7 +396,7 @@ const SUMMARY = [{"period": "2023-12-31", "income": null, "gp": null, "np": null
 const CASH = [["Stanbic 447 (KES)", 1405], ["Stanbic 448 (USD)", 3073], ["Sidian 415 (KES)", 15], ["Sidian 425 (USD)", 213], ["Paybill Devices (4073625)", 3272], ["Paybill Labs (4073623)", 382], ["Lotus", 112], ["MMF", 25], ["Petty Cash", 90]];
 const INFLOWS = [["2026-06-15", "Tembelea Platform deal (net of Incentro $3.5K & legal)", 5000, "Tembelea wires within 30 business days of signing"], ["2026-06-30", "Brenda installment 1", 2000, "Per email reply on installment terms"], ["2026-07-01", "Clarivate final tranche", 6000, "Eric needs to confirm final data submitted"], ["2026-07-15", "Zana milestone (100 patients)", 30000, "Currently at 80 patients per Max"]];
 const BURN = [["Lab rent (Ilara labs)", 2200], ["HQ rent", 850], ["Core ops salaries (cash paid)", 3000], ["Cloud (GCP + AWS)", 8500], ["Software & licenses", 250]];
-const REAL_ASSETS = [["Cash (bank + paybills + wallet)", 8588, "100%", "$8,588 in hand"], ["AR \u2014 Third party Good customer", 52000, "50%", "$26,000 recoverable"], ["AR \u2014 Third party At Risk", 52000, "15%", "$8,000 recoverable"], ["AR \u2014 AfyaNzima (intercompany)", 75000, "0%", "Container clinic sold to Dawa Pharmaceuticals; other clinic assets effectively written off."], ["Inventory (Butterfly + Hematology + BK + Pixotest, est.)", 150000, "TBC", "Pending Tony's serial count. Bulk sale via single distributor likely route."], ["Furniture / fixed assets", 0, "0%", "Damaged after move"]];
+const REAL_ASSETS = [["Cash (bank + paybills + wallet)", 8588, "100%", "$8,588 in hand"], ["AR \u2014 Third party Good customer", 52000, "50%", "$26,000 recoverable"], ["AR \u2014 Third party At Risk", 52000, "15%", "$8,000 recoverable"], ["AR \u2014 AfyaNzima (intercompany)", 75000, "0%", "Container clinic sold to Dawa Pharmaceuticals; other clinic assets effectively written off."], ["Inventory \u2014 sellable butterflies only", 100000, "TBC", "~40 sellable IQ+ butterflies @ $2,500 to $3,000 each. The rest of the warehouse (older butterflies, Pixotest, faulty units) is not sellable. Pending Tony's serial-numbered count."], ["Furniture / fixed assets", 0, "0%", "Damaged after move"]];
 const REAL_LIAB = [["AlphaMundi / AlphaJiri secured (all-asset debenture)", null, "Secured", "Outstanding balance per Term Sheet. AlphaMundi has consented to the Tembelea platform sale at $15K."], ["Payroll arrears (severance + back salaries)", 123000, "Statutory", "Personal liability risk"], ["Pharma suppliers (Eastleigh, Surgipharm, Harleys)", 59000, "Trade", "Trade payables"], ["Other (software, ops, rent)", 40000, "Trade", "Misc"], ["Africa Health Ventures loan", 19000, "Trade", "Debt"], ["Incentro arrears (Oct-Feb)", 14000, "Trade", "Separate from Tembelea Incentro $3K"], ["Tekrowe arrears", 14000, "Trade", "Software"], ["Max \u2014 JIA refund + back unpaid amounts", 11000, "Trade", "$11K is the known JIA refund floor. Additional back amounts per Bev email TBC \u2014 likely materially higher."], ["Emilian \u2014 founder back salaries + expenses", 120000, "Trade", "Per Bev's reconciliation email. Past expenses, unpaid salaries."], ["Statutory (NSSF/NHIF/SHIF)", 9000, "Statutory", "Statutory"], ["KRA payment plan + current", 6000, "Statutory", "Statutory"], ["Payroll FTE net (May)", 5000, "Statutory", "Current"]];
 
 // ---------- Tab nav ----------
@@ -486,15 +486,28 @@ new Chart(document.getElementById('chart-pnl-rev'), {
 });
 
 // ---------- BS chart ----------
+// BS chart: truncate at 2025-10-31 (last reliable accountant-prepared BS). Post-Oct 2025 Xero is stale (intercompany accruals, frozen inventory book values inflate assets to $8M+ which does not reflect reality).
+const BS_CUTOFF = '2025-10-31';
+const bsSummary = SUMMARY.filter(r => r.period <= BS_CUTOFF);
+const bsLabels = bsSummary.map(r => shortMonth(r.period));
+// Append "current reality" snapshot from Real BS
+bsLabels.push('NOW (Real BS)');
+const realTA = 142000, realTL = 420000, realEq = realTA - realTL;
+const realCash = 8588;
+const realTaArr = bsSummary.map(r => r.ta); realTaArr.push(realTA);
+const realTlArr = bsSummary.map(r => r.tl); realTlArr.push(realTL);
+const realEqArr = bsSummary.map(r => r.equity); realEqArr.push(realEq);
+const realCashArr = bsSummary.map(r => r.bank); realCashArr.push(realCash);
+
 new Chart(document.getElementById('chart-bs'), {
   type: 'line',
   data: {
-    labels: labels,
+    labels: bsLabels,
     datasets: [
-      { label: 'Total Assets', data: SUMMARY.map(r => r.ta), borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.1)', tension: 0.3, borderWidth: 2.5, pointRadius: 3, fill: false },
-      { label: 'Total Liabilities', data: SUMMARY.map(r => r.tl), borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.1)', tension: 0.3, borderWidth: 2.5, pointRadius: 3, fill: false },
-      { label: 'Equity', data: SUMMARY.map(r => r.equity), borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.1)', tension: 0.3, borderWidth: 2, pointRadius: 3, fill: false },
-      { label: 'Bank', data: SUMMARY.map(r => r.bank), borderColor: '#d97706', backgroundColor: 'rgba(217,119,6,0.1)', tension: 0.3, borderWidth: 2, pointRadius: 3, fill: false },
+      { label: 'Total Assets', data: realTaArr, borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.1)', tension: 0.3, borderWidth: 2.5, pointRadius: ctx => ctx.dataIndex === bsLabels.length - 1 ? 8 : 3, pointStyle: ctx => ctx.dataIndex === bsLabels.length - 1 ? 'rectRot' : 'circle', fill: false },
+      { label: 'Total Liabilities', data: realTlArr, borderColor: '#f97316', backgroundColor: 'rgba(249,115,22,0.1)', tension: 0.3, borderWidth: 2.5, pointRadius: ctx => ctx.dataIndex === bsLabels.length - 1 ? 8 : 3, pointStyle: ctx => ctx.dataIndex === bsLabels.length - 1 ? 'rectRot' : 'circle', fill: false },
+      { label: 'Equity', data: realEqArr, borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.1)', tension: 0.3, borderWidth: 2, pointRadius: ctx => ctx.dataIndex === bsLabels.length - 1 ? 8 : 3, pointStyle: ctx => ctx.dataIndex === bsLabels.length - 1 ? 'rectRot' : 'circle', fill: false },
+      { label: 'Cash / Bank', data: realCashArr, borderColor: '#0891b2', backgroundColor: 'rgba(8,145,178,0.1)', tension: 0.3, borderWidth: 2, pointRadius: ctx => ctx.dataIndex === bsLabels.length - 1 ? 8 : 3, pointStyle: ctx => ctx.dataIndex === bsLabels.length - 1 ? 'rectRot' : 'circle', fill: false },
     ]
   },
   options: {
@@ -514,23 +527,31 @@ new Chart(document.getElementById('chart-bs'), {
 });
 
 // ---------- Cash & Runway charts ----------
+// Bank chart: same Xero-stale issue post-Oct 2025. Truncate + append real today.
+const bankSummary = SUMMARY.filter(r => r.period <= '2025-10-31');
+const bankLabels = bankSummary.map(r => shortMonth(r.period)); bankLabels.push('NOW (Real)');
+const bankArr = bankSummary.map(r => r.bank); bankArr.push(8588);
+
 new Chart(document.getElementById('chart-bank'), {
   type: 'line',
   data: {
-    labels: labels,
+    labels: bankLabels,
     datasets: [{
-      label: 'Bank balance (Xero)', data: SUMMARY.map(r => r.bank),
-      borderColor: '#d97706', backgroundColor: 'rgba(217,119,6,0.15)', tension: 0.3, borderWidth: 2.5, pointRadius: 3, fill: true
+      label: 'Bank balance', data: bankArr,
+      borderColor: '#0891b2', backgroundColor: 'rgba(8,145,178,0.15)', tension: 0.3, borderWidth: 2.5,
+      pointRadius: ctx => ctx.dataIndex === bankLabels.length - 1 ? 8 : 3,
+      pointStyle: ctx => ctx.dataIndex === bankLabels.length - 1 ? 'rectRot' : 'circle',
+      fill: true
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
-      tooltip: { callbacks: { label: c => 'Bank: $' + fmtMoney(c.raw) } },
+      tooltip: { callbacks: { label: c => (c.label === 'NOW (Real)' ? 'Operating system live: $' : 'Bank: $') + fmtMoney(c.raw) } },
       datalabels: {
-        display: ctx => ctx.dataIndex % 2 === 0 && ctx.dataset.data[ctx.dataIndex] !== null,
-        align: 'top', offset: 4, font: { size: 9, weight: '600' }, color: '#d97706',
+        display: ctx => (ctx.dataIndex % 3 === 0 || ctx.dataIndex === bankLabels.length - 1) && ctx.dataset.data[ctx.dataIndex] !== null,
+        align: 'top', offset: 6, font: { size: 10, weight: '600' }, color: '#0891b2',
         formatter: v => v === null ? '' : fmtUsdK(v)
       }
     },
