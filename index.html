@@ -136,15 +136,39 @@
     .chart-box { height: 280px; }
     nav.tabs button { padding: 8px 10px; font-size: 12px; }
   }
+
+  /* Password gate */
+  #pw-gate { position: fixed; inset: 0; background: linear-gradient(135deg, #0f1729 0%, #1e3a8a 100%); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+  #pw-gate .box { background: white; padding: 36px 40px; border-radius: 12px; max-width: 380px; width: 100%; margin: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+  #pw-gate h2 { margin: 0 0 6px 0; font-size: 18px; color: #0f1729; }
+  #pw-gate p { margin: 0 0 18px 0; font-size: 13px; color: #5b657a; }
+  #pw-gate input { width: 100%; padding: 11px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; font-family: inherit; box-sizing: border-box; }
+  #pw-gate input:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+  #pw-gate button { width: 100%; padding: 11px; margin-top: 10px; border: none; background: #0f1729; color: white; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  #pw-gate button:hover { background: #1e3a8a; }
+  #pw-error { display: none; color: #dc2626; font-size: 12px; margin-top: 8px; }
+  #main-content { display: none; }
 </style>
 </head>
 <body>
+
+<div id="pw-gate">
+  <div class="box">
+    <h2>Ilara Health — Investor Pack</h2>
+    <p>This document is access-restricted. Please enter the code you received.</p>
+    <input id="pw-input" type="password" placeholder="Access code" autocomplete="off" autofocus />
+    <button id="pw-btn">Continue</button>
+    <div id="pw-error">Incorrect code. Try again.</div>
+  </div>
+</div>
+
+<div id="main-content">
 <div class="wrap">
 
 <header class="hero">
   <h1>Ilara Health — Investor Pack</h1>
   <div class="sub">Monthly financials, current cash, wind-down view</div>
-  <div class="as-of">Last refreshed: 2026-06-05 13:30 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
+  <div class="as-of">Last refreshed: 2026-06-05 15:59 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
 </header>
 
 <nav class="tabs">
@@ -326,8 +350,35 @@
 </section>
 
 </div>
+</div><!-- /#main-content -->
 
 <script>
+// Password gate
+const PW = "IlaraPack2026";
+function checkPw() {
+  const v = document.getElementById('pw-input').value;
+  if (v === PW) {
+    document.getElementById('pw-gate').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    initCharts();
+    try { sessionStorage.setItem('ilara_pack_ok', '1'); } catch (e) {}
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.getElementById('pw-btn').addEventListener('click', checkPw);
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
+try {
+  if (sessionStorage.getItem('ilara_pack_ok') === '1') {
+    document.getElementById('pw-gate').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    setTimeout(initCharts, 0);
+  }
+} catch (e) {}
+
+function initCharts() {
 // Register datalabels plugin globally
 if (window.ChartDataLabels) Chart.register(ChartDataLabels);
 Chart.defaults.set('plugins.datalabels', { display: false });
@@ -591,6 +642,7 @@ document.getElementById('real-liab').innerHTML = REAL_LIAB.map(([cred, usd, tier
   const amt = usd === null ? '<span class="muted">TBC</span>' : '$' + fmtMoney(usd);
   return `<tr><td>${cred}</td><td class="num">${amt}</td><td><span class="pill ${cls}">${tier}</span></td><td class="muted">${notes}</td></tr>`;
 }).join('');
+}// /initCharts
 </script>
 </body>
 </html>
