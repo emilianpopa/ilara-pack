@@ -175,7 +175,7 @@
 <header class="hero">
   <h1>Ilara Health — Investor Pack</h1>
   <div class="sub">Monthly financials, current cash, wind-down view</div>
-  <div class="as-of">Last refreshed: 2026-06-06 12:11 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
+  <div class="as-of">Last refreshed: 2026-06-06 12:18 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
 </header>
 
 <nav class="tabs">
@@ -659,7 +659,46 @@ function buildDetailTable(periodDict) {
   return `<table><thead><tr><th>Line item</th>${headerCells}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 document.getElementById('pnl-table').innerHTML = buildDetailTable(PNL);
-document.getElementById('bs-table').innerHTML = buildDetailTable(BS);
+
+// BS detail table: truncate Xero data at Oct 2025 (last reliable close).
+// Post-Oct 2025 Xero is unmaintained; cash balances accrue wrong values up to $130K
+// when real OS cash is $8.5K. Append a "NOW (Real)" column with operating-system truth.
+const BS_TRUNC = Object.fromEntries(Object.entries(BS).filter(([k]) => k <= '2025-10-31'));
+BS_TRUNC['2026-06-NOW'] = [
+  { label: 'Stanbic 447 (KES)', value: 1405 },
+  { label: 'Stanbic 448 (USD)', value: 3073 },
+  { label: 'Sidian 415 (KES)', value: 15 },
+  { label: 'Sidian 425 (USD)', value: 213 },
+  { label: 'Paybill Devices (4073625)', value: 3272 },
+  { label: 'Paybill Labs (4073623)', value: 382 },
+  { label: 'Lotus', value: 112 },
+  { label: 'MMF', value: 25 },
+  { label: 'Petty Cash', value: 90 },
+  { label: 'Total Bank', value: 8588, is_total: true },
+];
+function buildBsTable() {
+  const periods = Object.keys(BS_TRUNC).sort();
+  const seen = new Set(); const order = [];
+  periods.forEach(pe => (BS_TRUNC[pe] || []).forEach(li => {
+    const lbl = li.label.trim();
+    if (!seen.has(lbl)) { seen.add(lbl); order.push(lbl); }
+  }));
+  const headerCells = periods.map(pe => {
+    const lbl = pe === '2026-06-NOW' ? 'NOW (Real OS)' : shortMonth(pe);
+    return `<th class="num">${lbl}</th>`;
+  }).join('');
+  const rows = order.map(label => {
+    const isTotal = /^(total|net profit|gross profit|operating profit|net income|net assets)/i.test(label);
+    const trClass = isTotal ? 'total' : '';
+    const cells = periods.map(pe => {
+      const it = (BS_TRUNC[pe] || []).find(li => li.label.trim() === label);
+      return `<td class="num">${it ? fmtMoney(it.value) : ''}</td>`;
+    }).join('');
+    return `<tr class="${trClass}"><td>${label}</td>${cells}</tr>`;
+  }).join('');
+  return `<table><thead><tr><th>Line item</th>${headerCells}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+document.getElementById('bs-table').innerHTML = buildBsTable();
 
 // ---------- Cash tables ----------
 document.getElementById('cash-rows').innerHTML = CASH.map(([acct, usd]) =>
