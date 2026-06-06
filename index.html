@@ -175,7 +175,7 @@
 <header class="hero">
   <h1>Ilara Health — Investor Pack</h1>
   <div class="sub">Monthly financials, current cash, wind-down view</div>
-  <div class="as-of">Last refreshed: 2026-06-06 11:00 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
+  <div class="as-of">Last refreshed: 2026-06-06 11:19 · Data lineage: Accountant management accounts (Jan 2024 to Oct 2025) + Xero (Nov 2025 to Jun 2026) + Operating system (live cash & AR)</div>
 </header>
 
 <nav class="tabs">
@@ -193,7 +193,7 @@
     <div class="kpi alert"><div class="label">Cash today</div><div class="value">$8,588</div><div class="delta muted">As of 2026-06-02</div></div>
     <div class="kpi"><div class="label">Recoverable AR</div><div class="value">$34K</div><div class="delta muted">$178K book × realistic %</div></div>
     <div class="kpi"><div class="label">Sellable inventory</div><div class="value">~$100K</div><div class="delta muted">40 butterflies @ $2.5K to $3K; rest not sellable</div></div>
-    <div class="kpi alert"><div class="label">Total liabilities</div><div class="value">~$562K</div><div class="delta muted">$334K unsecured + $228K AlphaMundi secured (settles via Tembelea $15K)</div></div>
+    <div class="kpi alert"><div class="label">Total liabilities</div><div class="value">~$805K</div><div class="delta muted">$577K unsecured (Kenya + Inc) + $228K AlphaMundi secured</div></div>
     <div class="kpi alert"><div class="label">Net position</div><div class="value">Insolvent</div><div class="delta muted">AlphaMundi consented to Tembelea platform sale</div></div>
   </div>
 
@@ -325,7 +325,7 @@
     <table>
       <thead><tr><th>Creditor</th><th class="num">USD</th><th>Tier</th><th>Notes</th></tr></thead>
       <tbody id="real-liab"></tbody>
-      <tfoot><tr class="total"><td>TOTAL LIABILITIES</td><td class="num">~$562K</td><td colspan="2">$334K unsecured + $228K AlphaMundi secured. AHV removed (written off). Sources: Xero AP balances confirmed.</td></tr></tfoot>
+      <tfoot><tr class="total"><td>TOTAL LIABILITIES</td><td class="num">~$805K</td><td colspan="2">$577K unsecured (Kenya + Inc combined) + $228K AlphaMundi secured. Sources: Xero AP (Kenya + Inc) reconciled with Beverlyn's WhatsApp.</td></tr></tfoot>
     </table>
   </div>
 
@@ -407,7 +407,7 @@ const CASH = [["Stanbic 447 (KES)", 1405], ["Stanbic 448 (USD)", 3073], ["Sidian
 const INFLOWS = [["2026-06-15", "Tembelea Platform deal (net of Incentro $3.5K & legal)", 5000, "Tembelea wires within 30 business days of signing"], ["2026-06-30", "Brenda installment 1", 2000, "Per email reply on installment terms"], ["2026-07-01", "Clarivate final tranche", 6000, "Eric needs to confirm final data submitted"], ["2026-07-15", "Zana milestone (100 patients)", 30000, "Currently at 80 patients per Max"]];
 const BURN = [["Lab rent (Ilara labs)", 800], ["Core ops salaries (cash paid)", 3000], ["Cloud (GCP + AWS)", 8500], ["Software & licenses", 250], ["Monthly arrears allocation (employee dues, KRA, suppliers)", null], ["Wind-down legal / liquidation costs (one-time, amortised)", null]];
 const REAL_ASSETS = [["Cash (bank + paybills + wallet)", 8588, "100%", "$8,588 in hand"], ["AR \u2014 Third party Good customer", 52000, "50%", "$26,000 recoverable"], ["AR \u2014 Third party At Risk", 52000, "15%", "$8,000 recoverable"], ["AR \u2014 AfyaNzima (intercompany)", 75000, "0%", "Container clinic sold to Dawa Pharmaceuticals; other clinic assets effectively written off."], ["Inventory \u2014 sellable butterflies only", 100000, "TBC", "~40 sellable IQ+ butterflies @ $2,500 to $3,000 each. The rest of the warehouse (older butterflies, Pixotest, faulty units) is not sellable. Pending Tony's serial-numbered count."], ["Furniture / fixed assets", 0, "0%", "Damaged after move"]];
-const REAL_LIAB = [["AlphaMundi / AlphaJiri secured (all-asset debenture)", 228000, "Secured", "Outstanding $228K per Xero (KES 29.5M). Tembelea platform sale at $15K consented by AlphaMundi settles the secured position post-closing."], ["Payroll arrears (severance + back salaries)", 123000, "Statutory", "Personal liability risk"], ["Pharma suppliers (Eastleigh, Surgipharm, Harleys)", 59000, "Trade", "Trade payables"], ["Other (software, ops, rent)", 40000, "Trade", "Misc"], ["Incentro arrears (Oct-Feb)", 14000, "Trade", "Separate from Tembelea Incentro $3K"], ["Tekrowe arrears", 14000, "Trade", "Software"], ["Max Mancini \u2014 back amounts owed", 8597, "Trade", "$8.6K per Xero AP (maximilian.mancini@ilarahealth.com). Additional consulting/broker fees may be off-book per user \u2014 to confirm."], ["Emilian \u2014 founder back amounts owed", 55065, "Trade", "$55K per Xero AP (emilian@ilarahealth.com + Emilian Popa contact, combined). User believes Bev's reconciliation email shows $120K to $150K \u2014 searching Ilara Gmail to confirm exact amount."], ["Statutory (NSSF/NHIF/SHIF)", 9000, "Statutory", "Statutory"], ["KRA payment plan + current", 6000, "Statutory", "Statutory"], ["Payroll FTE net (May)", 5000, "Statutory", "Current"]];
+const REAL_LIAB = [["AlphaMundi / AlphaJiri secured (all-asset debenture)", 228000, "Secured", "Outstanding $228K per Xero (KES 29.5M). Tembelea platform sale at $15K consented by AlphaMundi settles the secured position post-closing."], ["Payroll arrears (severance + back salaries)", 123000, "Statutory", "Personal liability risk"], ["Pharma suppliers (Eastleigh, Surgipharm, Harleys)", 59000, "Trade", "Trade payables"], ["Other (software, ops, rent)", 40000, "Trade", "Misc"], ["Incentro arrears (Oct-Feb)", 14000, "Trade", "Separate from Tembelea Incentro $3K"], ["Tekrowe arrears", 14000, "Trade", "Software"], ["Max Mancini \u2014 Kenya AP", 8597, "Trade", "Per Kenya Xero AP."], ["Max Mancini \u2014 Ilara Inc (US)", 64300, "Trade", "Per Inc Xero AP. Combined Max across both entities: $72.9K."], ["Emilian \u2014 Kenya (Expensify + net salary)", 64078, "Trade", "Per Beverlyn (former finance manager) and Kenya Xero: KES 7.12M Expensify + KES 1.16M net salary = KES 8.28M."], ["Emilian \u2014 Ilara Inc (Expensify + consulting fees)", 50985, "Trade", "Per Inc Xero AP \u2014 exact match with Beverlyn's WhatsApp. Combined Emilian across both entities: ~$115K."], ["Sameer Farooqi \u2014 Ilara Inc (former CTO arrears)", 67872, "Trade", "Per Inc Xero AP."], ["Eric Knot \u2014 Ilara Inc", 24800, "Trade", "Per Inc Xero AP."], ["Other Inc creditors (Indinero, Dotzert, Perrone, Vereshchagin)", 22693, "Trade", "Per Inc Xero AP."], ["Statutory (NSSF/NHIF/SHIF)", 9000, "Statutory", "Statutory"], ["KRA payment plan + current", 6000, "Statutory", "Statutory"], ["Payroll FTE net (May)", 5000, "Statutory", "Current"]];
 
 // ---------- Tab nav ----------
 document.querySelectorAll('nav.tabs button').forEach(btn => {
@@ -502,7 +502,7 @@ const bsSummary = SUMMARY.filter(r => r.period <= BS_CUTOFF);
 const bsLabels = bsSummary.map(r => shortMonth(r.period));
 // Append "current reality" snapshot from Real BS
 bsLabels.push('NOW (Real BS)');
-const realTA = 142000, realTL = 562000, realEq = realTA - realTL;
+const realTA = 142000, realTL = 805000, realEq = realTA - realTL;
 const realCash = 8588;
 const realTaArr = bsSummary.map(r => r.ta); realTaArr.push(realTA);
 const realTlArr = bsSummary.map(r => r.tl); realTlArr.push(realTL);
